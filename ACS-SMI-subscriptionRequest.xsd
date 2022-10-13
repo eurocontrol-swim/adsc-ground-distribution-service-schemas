@@ -7,7 +7,6 @@
   <xsd:complexType name="subscriptionRequestType">
     <xsd:sequence>
       <xsd:element name="filter" type="xsd:string"/>
-      <!-- Additional elements to align with the ACS ICD -->
     </xsd:sequence>
   </xsd:complexType>
 
