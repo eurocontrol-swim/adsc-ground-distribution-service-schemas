@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="unqualified">
+  
+  <xsd:element name="subscriptionRequest" type="subscriptionRequestType"/>
+
+  <xsd:complexType name="subscriptionRequestType">
+    <xsd:sequence>
+      <xsd:element name="filter" type="xsd:string"/>
+      <!-- Additional elements to align with the ACS ICD -->
+    </xsd:sequence>
+  </xsd:complexType>
+
+</xsd:schema>

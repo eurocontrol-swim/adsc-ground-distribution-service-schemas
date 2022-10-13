@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="unqualified">
+  
+  <xsd:element name="subscriptionsList" type="subscriptionsListType"/>
+
+  <xsd:complexType name="subscriptionsListType">
+    <xsd:sequence>
+      <xsd:element name="subscriptionId" type="xsd:NCName"
+                   minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+
+</xsd:schema>

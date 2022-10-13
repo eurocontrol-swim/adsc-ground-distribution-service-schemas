@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+ xmlns:asn1="http://www.obj-sys.com/v1.0/XMLSchema"
+ elementFormDefault="unqualified">
+  <xsd:import namespace="http://www.obj-sys.com/v1.0/XMLSchema"
+              schemaLocation="http://www.obj-sys.com/v1.0/XMLSchema/asn1.xsd"/>
+
+  <xsd:element name="adsDemandReq" type="AdsDemandReq"/>
+
+  <xsd:complexType name="ATNAircraftAndFlightID">
+    <xsd:sequence>
+      <xsd:element name="aircraftAddress" type="AircraftAddress"/>
+      <xsd:element name="flightID" type="AircraftFlightIdentification"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="AdsDemandReq">
+    <xsd:sequence>
+      <xsd:element name="aircraftID" type="ATNAircraftAndFlightID"/>
+      <xsd:element name="request">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="ADSRequestContract"
+                         type="ADSRequestContractType"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="distributionAddress" type="xsd:anyURI" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ADSRequestContractType">
+    <xsd:sequence>
+      <xsd:element name="demand-contract" type="DemandContractRequest"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="DemandContractRequest">
+    <xsd:sequence>
+      <xsd:element name="contract-number" type="ContractNumber"/>
+      <xsd:element name="projected-profile" minOccurs="0" type="asn1:NULL"/>
+      <xsd:element name="ground-vector" minOccurs="0" type="asn1:NULL"/>
+      <xsd:element name="air-vector" minOccurs="0" type="asn1:NULL"/>
+      <xsd:element name="met-info" minOccurs="0" type="MetInfoRequest"/>
+      <xsd:element name="extended-projected-profile" minOccurs="0" type="EPPWindow"/>
+      <xsd:element name="toa-range" minOccurs="0" type="TOARangeRequest"/>
+      <xsd:element name="speed-schedule-profile" minOccurs="0" type="asn1:NULL"/>
+      <xsd:any namespace="##other" processContents="lax" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:simpleType name="AircraftAddress">
+    <xsd:restriction base="asn1:BitString">
+      <xsd:length value="24"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="AircraftFlightIdentification">
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="2"/>
+      <xsd:maxLength value="8"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="WaypointName">
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="1"/>
+      <xsd:maxLength value="5"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="ContractNumber">
+    <xsd:restriction base="xsd:unsignedByte"/>
+  </xsd:simpleType>
+
+  <xsd:complexType name="MetInfoRequest">
+    <xsd:sequence>
+      <xsd:element name="observation-window" default="15" minOccurs="0" type="TurbulenceObservationWindow"/>
+      <xsd:any namespace="##other" processContents="lax" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:simpleType name="TurbulenceObservationWindow">
+    <xsd:restriction base="xsd:unsignedByte">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="15"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:complexType name="EPPWindow">
+    <xsd:choice>
+      <xsd:element name="time-interval" >
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:unsignedShort">
+            <xsd:minInclusive value="15"/>
+            <xsd:maxInclusive value="1200"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="number-of-way-points" >
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:unsignedByte">
+            <xsd:minInclusive value="1"/>
+            <xsd:maxInclusive value="128"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name="TOARangeRequest">
+    <xsd:sequence>
+      <xsd:element name="latitudeLongitude" type="LatitudeLongitude"/>
+      <xsd:element name="name" minOccurs="0" type="WaypointName"/>
+      <xsd:any namespace="##other" processContents="lax" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="LatitudeDirection">
+    <xsd:choice>
+      <xsd:element name="north">
+        <xsd:complexType/>
+      </xsd:element>
+      <xsd:element name="south">
+        <xsd:complexType/>
+      </xsd:element>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name="Latitude">
+    <xsd:sequence>
+      <xsd:element name="direction" type="LatitudeDirection"/>
+      <xsd:element name="degrees" >
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:unsignedByte">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="90"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="minutes" >
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:unsignedByte">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="59"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="seconds" >
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:unsignedShort">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="599"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="LongitudeDirection">
+    <xsd:choice>
+      <xsd:element name="east">
+        <xsd:complexType/>
+      </xsd:element>
+      <xsd:element name="west">
+        <xsd:complexType/>
+      </xsd:element>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name="Longitude">
+    <xsd:sequence>
+      <xsd:element name="direction" type="LongitudeDirection"/>
+      <xsd:element name="degrees" >
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:unsignedByte">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="180"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="minutes" >
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:unsignedByte">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="59"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="seconds" >
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:unsignedShort">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="599"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="LatitudeLongitude">
+    <xsd:sequence>
+      <xsd:element name="latitude" type="Latitude"/>
+      <xsd:element name="longitude" type="Longitude"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+</xsd:schema>
