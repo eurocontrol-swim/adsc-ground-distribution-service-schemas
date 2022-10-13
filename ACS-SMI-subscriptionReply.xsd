@@ -8,7 +8,6 @@
     <xsd:sequence>
       <xsd:element name="subscriptionId" type="xsd:NCName"/>
       <xsd:element name="address" type="xsd:anyURI"/>
-      <!-- Additional elements to align with the ACS ICD -->
     </xsd:sequence>
   </xsd:complexType>
 
