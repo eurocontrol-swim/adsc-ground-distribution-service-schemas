@@ -25,7 +25,6 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="distributionAddress" type="xsd:anyURI" minOccurs="0"/>
     </xsd:sequence>
   </xsd:complexType>
 
