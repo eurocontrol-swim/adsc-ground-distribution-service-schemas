@@ -8,7 +8,6 @@
     <xsd:sequence>
       <xsd:element name="address" type="xsd:anyURI"/>
       <xsd:element name="filter" type="xsd:string"/>
-      <!-- Additional elements to align with the ACS ICD -->
     </xsd:sequence>
   </xsd:complexType>
 
