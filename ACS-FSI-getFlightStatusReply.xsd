@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:include id="Common_Types" schemaLocation="commonStatusTypes.xsd"/>
+    <xs:element name="flightStatus" type="FlightStatus">
+    </xs:element>
+    <xs:complexType name="FlightStatus">
+        <xs:sequence>
+            <xs:element name="flight" type="FlightIdentification"/>
+            <xs:element name="statusTime" type="xs:dateTime"/>
+            <xs:element name="status" type="StatusInformation" />
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

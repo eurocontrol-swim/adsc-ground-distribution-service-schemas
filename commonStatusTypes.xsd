@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+<xs:complexType name="StatusInformation">
+    <xs:sequence>
+      <xs:element name="connectionStatus">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="logon">
+              <xs:complexType>
+                <xs:choice>
+                  <xs:element name="notLoggedOn">
+                    <xs:complexType/>
+                  </xs:element>
+                  <xs:element name="loggedOn">
+                    <xs:complexType/>
+                  </xs:element>
+                </xs:choice>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="verification">
+              <xs:complexType>
+                <xs:choice>
+                  <xs:element name="notLoggedOn">
+                    <xs:complexType/>
+                  </xs:element>
+                  <xs:element name="failed">
+                    <xs:complexType/>
+                  </xs:element>
+                  <xs:element name="pending">
+                    <xs:complexType/>
+                  </xs:element>
+                  <xs:element name="successful">
+                    <xs:complexType/>
+                  </xs:element>
+                  <xs:element name="unable">
+                    <xs:complexType/>
+                  </xs:element>
+                </xs:choice>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="periodic">
+              <xs:complexType>
+                <xs:choice>
+                  <xs:element name="established">
+                    <xs:complexType/>
+                  </xs:element>
+                  <xs:element name="notEstablished">
+                    <xs:complexType/>
+                  </xs:element>
+                </xs:choice>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="event">
+              <xs:complexType>
+                <xs:choice>
+                  <xs:element name="established">
+                    <xs:complexType/>
+                  </xs:element>
+                  <xs:element name="notEstablished">
+                    <xs:complexType/>
+                  </xs:element>
+                </xs:choice>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="retryPending">
+              <xs:complexType>
+                <xs:choice>
+                  <xs:element name="false">
+                    <xs:complexType/>
+                  </xs:element>
+                  <xs:element name="true">
+                    <xs:complexType/>
+                  </xs:element>
+                </xs:choice>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="demand">
+              <xs:complexType>
+                <xs:choice>
+                  <xs:element name="notEstablished">
+                    <xs:complexType/>
+                  </xs:element>
+                  <xs:element name="requested">
+                    <xs:complexType/>
+                  </xs:element>
+                </xs:choice>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="groundStatus">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="abortInfo">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="abortTime" type="xs:dateTime"/>
+                  <xs:choice>
+                    <xs:element name="cmAbort" type="CMAbortReason"/>
+                    <xs:element name="userAbort" type="AdsUserAbortReason"/>
+                    <xs:element name="providerAbort"
+                                type="AdsProviderAbortReason"/>
+                  </xs:choice>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="inAoS">
+              <xs:complexType>
+                <xs:choice>
+                  <xs:element ref="false"/>
+                  <xs:element ref="true"/>
+                </xs:choice>
+              </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="lastContact" type="xs:dateTime"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+</xs:schema>
