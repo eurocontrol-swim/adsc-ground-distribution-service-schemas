@@ -6,6 +6,7 @@
 
   <xsd:complexType name="subscriptionRequestType">
     <xsd:sequence>
+      <!-- The filter must be a valid "APACHE.ORG:SELECTOR" expression. -->
       <xsd:element name="filter" type="xsd:string"/>
     </xsd:sequence>
   </xsd:complexType>
