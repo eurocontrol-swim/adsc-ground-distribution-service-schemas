@@ -1,115 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-  <xsd:simpleType name="ICAOAircraftAddress">
-    <xsd:restriction base="xsd:string">
-        <xsd:pattern value="^[A-F0-9]{6}$"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	   elementFormDefault="qualified">
+  
+  <xs:simpleType name="ICAOAircraftAddress">
+    <xs:restriction base="xs:string">
+        <xs:pattern value="[A-F0-9]{6}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="AircraftFlightIdentification">
+    <xs:restriction base="xs:string">
+        <xs:minLength value="2"/>
+        <xs:maxLength value="8"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="Airport">
+    <xs:restriction base="xs:string">
+        <xs:length value="4"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xsd:simpleType name="VersionNumber">
+    <xsd:restriction base="xsd:unsignedByte">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="255"/>
     </xsd:restriction>
   </xsd:simpleType>
-  <xsd:simpleType name="AircraftFlightIdentification">
-    <xsd:restriction base="xsd:string">
-        <xsd:minLength value="2"/>
-        <xsd:maxLength value="8"/>
-    </xsd:restriction>
-  </xsd:simpleType>
-  <xsd:simpleType name="Airport">
-    <xsd:restriction base="xsd:string">
-        <xsd:length value="4"/>
-    </xsd:restriction>
-  </xsd:simpleType>
+
   <xs:complexType name="FlightIdentification">
     <xs:sequence>
-      <xs:element name="aircraftAddress" minOccurs="1" maxOccurs="1" type="ICAOAircraftAddress"/>
-      <xs:element name="flightID" minOccurs="1" maxOccurs="1" type="AircraftFlightIdentification"/>
-      <xs:element name="arrivalAirport" minOccurs="0" maxOccurs="1" type="Airport"/>
-      <xs:element name="departureAirport" minOccurs="0" maxOccurs="1" type="Airport"/>
+      <xs:element name="aircraftAddressHex" type="ICAOAircraftAddress"/>
+      <xs:element name="flightID" type="AircraftFlightIdentification"/>
+      <xs:element name="arrivalAirport" minOccurs="0" type="Airport"/>
+      <xs:element name="departureAirport" minOccurs="0" type="Airport"/>
     </xs:sequence>
   </xs:complexType>
+  
+  <xs:complexType name="EnumerationValue" final="#all" />
+
+  <xs:complexType name="ContractStatus">
+    <xs:choice>
+      <xs:element name="IDLE" type="EnumerationValue"/>
+      <xs:element name="PENDING" type="EnumerationValue"/>
+      <xs:element name="ACTIVE" type="EnumerationValue"/>
+      <xs:element name="CANCELLED" type="EnumerationValue"/>
+      <xs:element name="REJECTED" type="EnumerationValue"/>
+      <xs:element name="ACS_USER_ABORTED" type="EnumerationValue"/>
+      <xs:element name="AIR_USER_ABORTED" type="EnumerationValue"/>
+      <xs:element name="PROVIDER_ABORTED" type="EnumerationValue"/>
+      <!-- more possibilities ?? -->
+    </xs:choice>
+  </xs:complexType>
+  
+  <xs:complexType name="AdsUserAbortReason">
+    <xs:choice>
+      <xs:element name="undefined">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="unknown-integrity-check">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="validation-failure">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="unable-to-decode-message">
+        <xs:complexType/>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+
+  <xs:complexType name="AdsProviderAbortReason">
+    <xs:choice>
+      <xs:element name="communications-service-failure">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="unrecoverable-system-error">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="invalid-PDU">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="sequence-error">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="timer-expiry">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="cannot-establish-contact">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="undefined-error">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="dialogue-end-not-accepted">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="unexpected-PDU">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="decoding-error">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="invalid-qos-parameter">
+        <xs:complexType/>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+
   <xs:complexType name="StatusInformation">
     <xs:sequence>
+      <xs:element name="adsVersion" type="VersionNumber" />
       <xs:element name="connectionStatus">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="logon">
-              <xs:complexType>
-                <xs:choice>
-                  <xs:element name="notLoggedOn">
-                    <xs:complexType/>
-                  </xs:element>
-                  <xs:element name="loggedOn">
-                    <xs:complexType/>
-                  </xs:element>
-                </xs:choice>
-              </xs:complexType>
-            </xs:element>
             <xs:element name="verification">
               <xs:complexType>
                 <xs:choice>
-                  <xs:element name="notLoggedOn">
+                  <xs:element name="fplVerified">
                     <xs:complexType/>
                   </xs:element>
-                  <xs:element name="failed">
+                  <xs:element name="fplInconsitent">
                     <xs:complexType/>
                   </xs:element>
-                  <xs:element name="pending">
-                    <xs:complexType/>
-                  </xs:element>
-                  <xs:element name="successful">
-                    <xs:complexType/>
-                  </xs:element>
-                  <xs:element name="unable">
+                  <xs:element name="fplInexistent">
                     <xs:complexType/>
                   </xs:element>
                 </xs:choice>
               </xs:complexType>
             </xs:element>
-            <xs:element name="periodic">
-              <xs:complexType>
-                <xs:choice>
-                  <xs:element name="established">
-                    <xs:complexType/>
-                  </xs:element>
-                  <xs:element name="notEstablished">
-                    <xs:complexType/>
-                  </xs:element>
-                </xs:choice>
-              </xs:complexType>
-            </xs:element>
-            <xs:element name="event">
-              <xs:complexType>
-                <xs:choice>
-                  <xs:element name="established">
-                    <xs:complexType/>
-                  </xs:element>
-                  <xs:element name="notEstablished">
-                    <xs:complexType/>
-                  </xs:element>
-                </xs:choice>
-              </xs:complexType>
-            </xs:element>
-            <xs:element name="retryPending">
-              <xs:complexType>
-                <xs:choice>
-                  <xs:element name="false">
-                    <xs:complexType/>
-                  </xs:element>
-                  <xs:element name="true">
-                    <xs:complexType/>
-                  </xs:element>
-                </xs:choice>
-              </xs:complexType>
-            </xs:element>
-            <xs:element name="demand">
-              <xs:complexType>
-                <xs:choice>
-                  <xs:element name="notEstablished">
-                    <xs:complexType/>
-                  </xs:element>
-                  <xs:element name="requested">
-                    <xs:complexType/>
-                  </xs:element>
-                </xs:choice>
-              </xs:complexType>
-            </xs:element>
+            <xs:element name="periodic" type="ContractStatus" />
+            <xs:element name="event" type="ContractStatus" />
+            <xs:element name="demand" type="ContractStatus" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -121,20 +143,11 @@
                 <xs:sequence>
                   <xs:element name="abortTime" type="xs:dateTime"/>
                   <xs:choice>
-                    <xs:element name="cmAbort" type="CMAbortReason"/>
                     <xs:element name="userAbort" type="AdsUserAbortReason"/>
                     <xs:element name="providerAbort"
                                 type="AdsProviderAbortReason"/>
                   </xs:choice>
                 </xs:sequence>
-              </xs:complexType>
-            </xs:element>
-            <xs:element name="inAoS">
-              <xs:complexType>
-                <xs:choice>
-                  <xs:element ref="false"/>
-                  <xs:element ref="true"/>
-                </xs:choice>
               </xs:complexType>
             </xs:element>
             <xs:element minOccurs="0" name="lastContact" type="xs:dateTime"/>
