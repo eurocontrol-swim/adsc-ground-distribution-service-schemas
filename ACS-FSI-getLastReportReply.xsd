@@ -8,6 +8,7 @@
       <xs:sequence>
         <xs:element name="flight" type="FlightIdentification"/>
         <xs:element name="reportTime" type="xs:dateTime"/>
+		<xs:element name="adsVersion" minOccurs="0" type="VersionNumber"/>
         <xs:element name="report" type="ADSReportType" />
       </xs:sequence>
     </xs:complexType>
