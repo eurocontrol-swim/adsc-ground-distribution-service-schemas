@@ -21,12 +21,9 @@
     </xs:restriction>
   </xs:simpleType>
 
-  <xsd:simpleType name="VersionNumber">
-    <xsd:restriction base="xsd:unsignedByte">
-      <xsd:minInclusive value="1"/>
-      <xsd:maxInclusive value="255"/>
-    </xsd:restriction>
-  </xsd:simpleType>
+  <xs:simpleType name="VersionNumber">
+    <xs:restriction base="xs:unsignedByte"/>
+  </xs:simpleType>
 
   <xs:complexType name="FlightIdentification">
     <xs:sequence>
@@ -117,13 +114,13 @@
             <xs:element name="verification">
               <xs:complexType>
                 <xs:choice>
-                  <xs:element name="fplVerified">
+                  <xs:element name="flightplanVerified">
                     <xs:complexType/>
                   </xs:element>
-                  <xs:element name="fplInconsitent">
+                  <xs:element name="flightplanInconsitent">
                     <xs:complexType/>
                   </xs:element>
-                  <xs:element name="fplInexistent">
+                  <xs:element name="flightplanInexistent">
                     <xs:complexType/>
                   </xs:element>
                 </xs:choice>
