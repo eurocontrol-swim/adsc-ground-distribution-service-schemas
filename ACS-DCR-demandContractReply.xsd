@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="unqualified">
+
+  <xsd:element name="adsDemandReply" type="AdsDemandReply"/>
+  
+  <xsd:simpleType name="ContractNumber">
+    <xsd:restriction base="xsd:unsignedByte"/>
+  </xsd:simpleType>
+
+  <xsd:complexType name="AdsDemandReply">
+    <xsd:sequence>
+      <xsd:element name="contract-number" type="ContractNumber"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+</xsd:schema>
