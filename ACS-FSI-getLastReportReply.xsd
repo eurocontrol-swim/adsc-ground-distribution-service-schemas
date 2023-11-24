@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
   <xs:import namespace="http://www.obj-sys.com/v1.0/XMLSchema" schemaLocation="http://www.obj-sys.com/v1.0/XMLSchema/asn1.xsd" /> 
-  <xs:include id="ADS_Message_set" schemaLocation="ADSMessageSetVersion1_ACS.xsd" />
+  <xs:include id="ADS_Message_set" schemaLocation="ADSMessageSetVersion3_ACS.xsd" />
   <xs:include id="Common_Types" schemaLocation="commonStatusTypes.xsd"/>
   <xs:element name="lastReport">
     <xs:complexType>
