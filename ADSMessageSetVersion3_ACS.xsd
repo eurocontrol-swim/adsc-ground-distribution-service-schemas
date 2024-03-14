@@ -672,7 +672,7 @@
 
    <xsd:simpleType name="VerticalRate">
       <xsd:restriction base="xsd:unsignedShort">
-         <xsd:minInclusive value="0"/>
+         <xsd:minInclusive value="-3000"/>
          <xsd:maxInclusive value="3000"/>
       </xsd:restriction>
    </xsd:simpleType>
