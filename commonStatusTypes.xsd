@@ -117,7 +117,7 @@
                   <xs:element name="flightplanVerified">
                     <xs:complexType/>
                   </xs:element>
-                  <xs:element name="flightplanInconsitent">
+                  <xs:element name="flightplanInconsistent">
                     <xs:complexType/>
                   </xs:element>
                   <xs:element name="flightplanInexistent">
