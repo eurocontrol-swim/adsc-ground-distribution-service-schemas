@@ -7,7 +7,7 @@
    <xsd:import namespace="http://www.obj-sys.com/v1.0/XMLSchema"
     schemaLocation="asn1.xsd"/>
    <xsd:include id="ADS_Message_set"
-                schemaLocation="ADSMessageSetVersion1_ACS.xsd"/>
+                schemaLocation="ADSMessageSetVersion3_ACS.xsd"/>
 
    <xsd:element name="ACSMessage" type="ACSDataMessageType"/>
    <xsd:complexType name="ACSDataMessageType">
