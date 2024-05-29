@@ -15,7 +15,7 @@
     </xsd:restriction>
   </xsd:simpleType>
 
-  <xsd:simpleType name="Airport">
+  <xsd:simpleType name="ICAOAirport">
     <xsd:restriction base="xsd:string">
         <xsd:length value="4"/>
     </xsd:restriction>
