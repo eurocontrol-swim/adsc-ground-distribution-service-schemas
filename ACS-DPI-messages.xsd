@@ -43,10 +43,10 @@
    </xsd:simpleType>
 
    <xsd:simpleType name="AircraftAddress">
-      <xsd:restriction base="asn1:BitString">
-         <xsd:length value="24"/>
-      </xsd:restriction>
-   </xsd:simpleType>
+    <xsd:restriction base="xsd:string">
+        <xsd:pattern value="[A-F0-9]{6}"/>
+    </xsd:restriction>
+  </xsd:simpleType>
 
    <xsd:simpleType name="AircraftFlightIdentification">
       <xsd:restriction base="xsd:string">
