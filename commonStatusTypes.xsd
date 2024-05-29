@@ -29,8 +29,8 @@
     <xsd:sequence>
       <xsd:element name="aircraftAddressHex" type="ICAOAircraftAddress"/>
       <xsd:element name="flightID" type="AircraftFlightIdentification"/>
-      <xsd:element name="arrivalAirport" minOccurs="0" type="Airport"/>
-      <xsd:element name="departureAirport" minOccurs="0" type="Airport"/>
+      <xsd:element name="arrivalAirport" minOccurs="0" type="ICAOAirport"/>
+      <xsd:element name="departureAirport" minOccurs="0" type="ICAOAirport"/>
     </xsd:sequence>
   </xsd:complexType>
   
