@@ -123,6 +123,9 @@
                   <xsd:element name="flightplanInexistent">
                     <xsd:complexType/>
                   </xsd:element>
+                  <xsd:element name="unable">
+                    <xsd:complexType/>
+                  </xsd:element>
                 </xsd:choice>
               </xsd:complexType>
             </xsd:element>
